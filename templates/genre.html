@@ -11,30 +11,18 @@
         <div class="header">
             <h1>Open Trivia DB Game!</h1>
         </div>
-        <div class="container">
-            <div class="text-center">
-                <p>What genre would you like?</p>
-            </div>
-        </div>
         <div>
             <p>
                 {{ count }}
             </p>
+            <p>
+                {{ category }}
+            </p>
         </div>
         <form action="/trivia.html" method="post">
-        <div>
-            <label for="genre">Choose a genre:</label>
-                <select id="genre" name="selected_genre">
-                    <option value="general">General</option>
-                    <option value="movies">Movies</option>
-                    <option value="music">Music</option>
-                    <option value="video games">Video Games</option>
-                    <option value="anime/manga">Anime/Manga</option>
-                </select>
-                <div>
-                    <button type="submit" id="question_genre">Submit</button>
-                </div>
-            </form>
-        </div>
+            <div>
+                <button type="submit" id="question_genre">Submit</button>
+            </div>
+        </form>
     </body>
 </html>
