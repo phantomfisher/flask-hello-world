@@ -11,8 +11,7 @@ genres = {
     "movies": "11",
     "music": "12",
     "video games": "15",
-    "anime": "31",
-    "manga": "31",
+    "anime/manga": "31",
     }
 
 @app.route("/", methods=["GET", "POST"])
