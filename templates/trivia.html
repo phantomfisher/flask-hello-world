@@ -16,11 +16,12 @@
                 <p>
                     {{ trivia_question}}
                 </p>
+                <div class="spacer"></div>
                 <div>
                     {% for answer in answers %}
                     <form action="/answer.html" method="post">
                         <input type="hidden" name="answer" value="{{ answer }}">
-                        <button type="submit" class="btn btn-primary">{{ answer }}</button>
+                        <button class="full-width-button" type="submit" class="btn btn-primary">{{ answer }}</button>
                     </form>
                 {% endfor %}    
                 </div>
