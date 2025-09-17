@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 import requests
 import random
 import html
+import time
 
 app = Flask(__name__)
 app.secret_key = "testkey"
@@ -11,32 +12,34 @@ genres = {
     "movies": "11",
     "music": "12",
     "video games": "15",
-    "anime/manga": "31",
+    "anime/manga": "31"
     }
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    session["score"] = 0
-
     return render_template("index.html")
 
 @app.route("/genre.html", methods=["GET", "POST"])
-def genre():
+def trivia_genre():
     session["count"] = request.form["quantity"]
+    session["genre"] = genres[request.form["selected_genre"]]
+    response = requests.get(
+        "https://opentdb.com/api.php?amount="
+        + str(session["count"])
+        + "&category="
+        + session["genre"]
+    ).json()
     count = f"Number of questions: {session["count"]}"
-    return render_template("genre.html", count=count)
+    category = f"Category: {request.form["selected_genre"].capitalize()}"
+    session["current"] = 0
+    session["questions"] = response["results"]
+    return render_template("genre.html", count=count, category=category)
 
 @app.route("/trivia.html", methods=["GET", "POST"])
+    
 def question():
-    if request.method == "POST" and "questions" not in session:
-        session["current"] = 0
-        session["genre"] = genres[request.form["selected_genre"]]
-        response = question_generation(session["count"], session["genre"])
-        session["questions"] = response["results"]
-
     current = session["current"]
     result = session["questions"][current]
-
     trivia_question = html.unescape(result["question"])
     session["correct"] = result["correct_answer"]
 
@@ -83,16 +86,9 @@ def answer():
             score=score,
             correct=correct)
 
-def question_generation(count, genre):
-    response = requests.get(
-        "https://opentdb.com/api.php?amount="
-        + str(count)
-        + "&category="
-        + genre
-    )
-    return response.json()
 
 @app.route("/restart", methods=["POST"])
 def restart():
     session.clear()
+    session["score"] = 0
     return redirect(url_for("index"))
