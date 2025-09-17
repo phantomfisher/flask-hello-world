@@ -71,6 +71,9 @@ def question():
 
 @app.route("/answer.html", methods=["GET", "POST"])
 def answer():
+    if "score" not in session:
+        session["score"] = 0
+        
     selected = request.form["answer"]
     correct = session["correct"]
     session["current"] += 1
