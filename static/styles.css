@@ -32,8 +32,7 @@ a {
 }
 
 .full-width-button {
-    display: block;
-    width: 100%;
+    width: 60%;
     padding: 15px 20px;
     background-color: black;
     color: white;
