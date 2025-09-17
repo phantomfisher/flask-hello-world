@@ -43,10 +43,10 @@ def question():
 
     if result["type"] == "multiple":
         answers = [
-            result["correct_answer"],
-            result["incorrect_answers"][0],
-            result["incorrect_answers"][1],
-            result["incorrect_answers"][2],
+            html.unescape(result["correct_answer"]),
+            html.unescape(result["incorrect_answers"][0]),
+            html.unescape(result["incorrect_answers"][1]),
+            html.unescape(result["incorrect_answers"][2]),
         ]
         random.shuffle(answers)
     elif result["type"] == "boolean":
