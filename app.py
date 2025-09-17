@@ -38,6 +38,10 @@ def trivia_genre():
 @app.route("/trivia.html", methods=["GET", "POST"])
     
 def question():
+
+    if session["current"] >= len(session["questions"]):
+        return render_template("finalscore.html", score=session["score"])
+    
     current = session["current"]
     result = session["questions"][current]
     trivia_question = html.unescape(result["question"])
@@ -70,9 +74,6 @@ def answer():
     selected = request.form["answer"]
     correct = session["correct"]
     session["current"] += 1
-
-    if session["current"] >= len(session["questions"]):
-        return render_template("finalscore.html", score=session["score"])
 
     if selected == correct:
         session["score"] += 1
