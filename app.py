@@ -77,7 +77,7 @@ def answer():
         score = f"Score: {session["score"]}"
         return render_template("correct.html", score=score)
     else:
-        correct=f"Correct Answer: {session["correct"]}"
+        correct=f"Correct Answer: {html.unescape(session["correct"])}"
         score = f"Score: {session["score"]}"
         return render_template(
             "incorrect.html",
