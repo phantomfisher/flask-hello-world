@@ -12,12 +12,19 @@
             <h1>Open Trivia DB Game!</h1>
         </div>
         <div class="container">
-            <p>How many questions would you like to answer?</p>
+            <p>Please Select The Number Of Questions And Category: </p>
         </div>
         <form action="/genre.html" method="post">
             <div>
                 <input type="number" id="quantity" name="quantity" min="1" max="10" value="1">
             </div>
+            <select id="genre" name="selected_genre">
+                <option value="general">General</option>
+                <option value="movies">Movies</option>
+                <option value="music">Music</option>
+                <option value="video games">Video Games</option>
+                <option value="anime/manga">Anime/Manga</option>
+            </select>
             <div>
                 <button type="submit">Submit</button>
             </div>
