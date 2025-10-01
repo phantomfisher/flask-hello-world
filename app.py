@@ -45,7 +45,7 @@ def question():
     current = session["current"]
     result = session["questions"][current]
     trivia_question = html.unescape(result["question"])
-    session["correct"] = result["correct_answer"]
+    session["correct"] = html.unescape(result["correct_answer"])
 
     if result["type"] == "multiple":
         answers = [
